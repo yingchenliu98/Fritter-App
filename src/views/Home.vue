@@ -3,11 +3,12 @@
         <Navbar />
         <section class="body-container">
             <div v-if="userName">
-                <h1> Welcome, {{ userName }} !</h1>
+                <h1> Welcome, {{ userName }}!</h1>
             </div>
             <div v-else class="body-container">
                 <h1>Welcome to Fritter!</h1>
-                <p>This is the best place to see what’s happening in your world. Find some people and topics to follow now.</p>
+                <p>This is the best place to see what’s happening in your world.</p>
+                <p>Find some people and topics to follow now.</p>
             </div>
             <br>
             <router-link class="freets-link" to="/freets">Let's go!</router-link>

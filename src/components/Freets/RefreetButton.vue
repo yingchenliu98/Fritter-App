@@ -15,7 +15,13 @@
       @mouseover="showRefreeters=true"
       @mouseleave="showRefreeters=false"
       v-on:click="open? Refreet():AddComment()" 
-      > {{refreetButton.text}} {{freet.numRefreets}}
+      > <i class="fa fa-share blue-color"></i> {{refreetButton.text}} {{freet.numRefreets}}
+    </button>
+    <button  
+      class="button" 
+      v-show="open"
+      v-on:click="open=false" 
+      > <i class="fa fa-close"></i> Cancel
     </button>
 
     <div v-show="showRefreeters">
@@ -84,3 +90,8 @@ export default {
     }
 }
 </script>
+<style scoped>
+.blue-color{
+    color:#3CA3D8;
+}
+</style>

@@ -1,54 +1,65 @@
 <template>
   <div class="freet">
-      
+      <button  
+        class="delete-button" 
+        v-show= "userName===freet.author"
+        v-on:click="DeleteFreet"><i class="fa fa-trash"></i>
+      </button>
+       <button
+        class="edit-button" 
+        v-show="!open && userName===freet.author"
+        v-on:click="EditFreet"
+        ><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>
+    
 
-    <h4>freet id: <span>{{ freet.id }}</span></h4>
-    <h5>last edit: <br><span>{{ freet.timestamp }} </span></h5>
-    <h5> Author: 
-      <span>{{ freet.author }}
-      <FollowButton 
+    <h5><p>Freet id: <span>{{ freet.id }}</span></p>
+    <p>last edit: {{ freet.timestamp }}</p></h5>
+    <div class="author" display:inline > Author: 
+     {{ freet.author }} 
+     <FollowButton 
       :freet = freet
       :userName = userName
       />
-      </span>
-    </h5>
-    <p>{{ freet.content }}</p>
- 
-    <UpvoteButton
-    :freet = freet
-    :userName = userName
-    />
-
-    <RefreetButton
-    :freet = freet
-    :userName = userName
-    />
-    
-    <div class="buttons">   
-    <button  
-      class="button" 
-      v-show= "userName===freet.author"
-      v-on:click="DeleteFreet">Delete
-    </button>
-
+    </div>
+    <p v-show="!open">{{ freet.content }} </p>
+       <textarea 
+        class="freet-container" 
+        v-show="open"
+        id="content"
+        v-model="NewFreet.content">
+      </textarea>
     <button
-      class="button" 
-      v-show="!open && userName===freet.author"
-      v-on:click="EditFreet"
-      >Edit</button> 
+        class="edit-button" 
+        v-show="open"
+        v-on:click="SubmitEditedFreet"
+        ><i class="fa fa-check" aria-hidden="true"></i>Submit</button> 
 
-    <button
+      <button  
       class="button" 
       v-show="open"
-      v-on:click="SubmitEditedFreet"
-      >Submit</button> 
-  </div>
-  <textarea 
-    class="freet-container" 
-    v-show="open"
-    id="content"
-    v-model="NewFreet.content"></textarea>
-  </div>
+      v-on:click="open=false" 
+      > <i class="fa fa-close"></i> Cancel
+      </button>
+    
+      <div class= "button" display:flex align:left>
+        <UpvoteButton
+        :freet = freet
+        :userName = userName
+        />
+      </div>
+      <div class= "refreet-button" >
+        <RefreetButton
+        :freet = freet
+        :userName = userName
+        />
+      </div>
+ 
+
+    </div>
+    
+  
+  
+    
 
 </template>
 
@@ -148,10 +159,17 @@ export default {
   height: 100px;
 }
 
-.buttons{
+.author{
   display:flex; 
-  justify-content:flex-end;
+  text-align: center;
   
+}
+
+.delete-button{
+  float: right;
+}
+.edit-button{
+  float: right;
 }
 
 </style>
