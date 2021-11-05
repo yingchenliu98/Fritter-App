@@ -4,8 +4,8 @@
       class="button" 
       @mouseover="showUpvoters=true"
       @mouseleave="showUpvoters=false"
-      v-on:click="upvoted ? UnUpvoteFreet() : UpvoteFreet()" 
-      > {{upVoteButton.text}} {{ freet.numUpvotes }}
+      v-on:click.prevent="upvoted ? UnUpvoteFreet() : UpvoteFreet()" 
+      ><i class="fa fa-heart red-color " ></i> {{upVoteButton.text}} {{ freet.numUpvotes }}
     </button>
     <div v-show="showUpvoters">
       <span> {{ freet.upvoters.join(', ')}}</span>
@@ -87,4 +87,8 @@ export default {
   justify-content:flex-end;
  
 }
+.red-color {
+color:red;
+}
+
 </style>

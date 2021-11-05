@@ -4,7 +4,7 @@
         class="button"
         v-show="userName!==freet.author"
         v-on:click="followed? UnFollow() : Follow()"
-        >{{followButton.text}}
+        ><i class="fa fa-plus" aria-hidden="true"></i>{{followButton.text}}
     </button>
     </div>
 
@@ -30,7 +30,7 @@ export default {
             followed: false,
             userProfile: null,
             followButton:{
-                text: '+ Follow'
+                text: ' Follow'
             },
        }
    },
@@ -44,7 +44,7 @@ export default {
                     this.followed = false;
                 }
 
-                this.followButton.text = this.followed ? 'Following' : '+ Follow';
+                this.followButton.text = this.followed ? ' Following' : ' Follow';
        })
     },
     methods:{

@@ -1,8 +1,6 @@
 <template>
     <div>
         <Navbar />
-        
-
         <div class="body-container">
             <UserProfile />  
         </div>
