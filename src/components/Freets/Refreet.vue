@@ -1,5 +1,10 @@
 <template>
   <div class="refreet">
+    <button  
+      class="delete-button" 
+      v-show= "userName===refreet.refreeter"
+      v-on:click="DeleteRefreet()"><i class="fa fa-trash"></i>
+    </button>
     <h4>refreet id: <span>{{ refreet.id }}</span></h4>
     <h5>time <br><span>{{ refreet.timestamp }} </span></h5>
     {{ refreet.refreeter }}: {{refreet.comments}}
@@ -10,11 +15,7 @@
 
     <div class="buttons">   
    
-    <button  
-      class="button" 
-      v-show= "userName===refreet.refreeter"
-      v-on:click="DeleteRefreet()">Delete
-    </button>
+
     </div>
 </div>
 </template>
@@ -54,7 +55,7 @@ export default {
             if(response.data){
                 this.originalFreet = response.data;
             }
-            console.log('hahahh')
+            
             //console.log(this.originalFreet)
         })
         .catch((error) => {
@@ -129,5 +130,7 @@ export default {
   justify-content:flex-end;
   
 }
-
+.delete-button{
+  float: right;
+}
 </style>

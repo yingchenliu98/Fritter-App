@@ -80,20 +80,26 @@ class Freets {
    * @return {Freet | undefined} - the found freet with above id
    */
   static findById(id) {
-    const freet = freet_data.filter(freet => freet.id === id)[0];
-    return freet
+    if (id.indexOf('re')===-1){
+      const freet = freet_data.filter(freet => freet.id === id)[0];
+      return freet
+    }else{
+      const refreet = refreet_data.filter(refreet => refreet.id === id)[0];
+      return refreet 
+    }
+  
   }
 
-  /**
-   * View a Freet by Id. 
-   * 
-   * @param {string} id - The id of the refreet to find
-   * @return {Freet | undefined} - the found freet with above id
-   */
-  static findByIdRefreet(id) {
-    const refreet = refreet_data.filter(refreet => refreet.id === id)[0];
-    return refreet 
-    }
+  // /**
+  //  * View a Freet by Id. 
+  //  * 
+  //  * @param {string} id - The id of the refreet to find
+  //  * @return {Freet | undefined} - the found freet with above id
+  //  */
+  // static findByIdRefreet(id) {
+  //   const refreet = refreet_data.filter(refreet => refreet.id === id)[0];
+  //   return refreet 
+  //   }
 
 
   /**
@@ -222,11 +228,9 @@ class Freets {
    */
   static upvote(id, username) {
     let freet = null;
-    if (id.indexOf('re') !== -1){
-      freet = Freets.findByIdRefreet(id);
-    }else{
-      freet = Freets.findById(id);
-    }
+
+    freet = Freets.findById(id);
+    
     //const freet = Freets.findById(id);
     if(!freet.upvoters.includes(username)){
       freet.numUpvotes += 1;
@@ -246,11 +250,9 @@ class Freets {
    */
   static revokeUpvote(id, username) {
     let freet = null;
-    if(id.indexOf('re') !== -1){
-      freet = Freets.findByIdRefreet(id);
-    }else{
-      freet = Freets.findById(id);
-    }
+    
+    freet = Freets.findById(id);
+    
     let index = freet.upvoters.indexOf(username);
     if (index > -1) {
         if(freet.numUpvotes>0){

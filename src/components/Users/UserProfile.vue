@@ -13,7 +13,7 @@
             <button
                 class="freets-link"
                 @mouseover="showLikesFn()"
-                >Likes ({{upvotedFreets? upvotedFreets.length:0}})
+                >Likes ({{numLikes}})
             </button>
             <button
                 class="freets-link"
@@ -113,7 +113,7 @@ export default {
             userProfile: [],
             myFreets: [],
             myRefreets: [],
-            upvotedFreets: [],
+            upvotedFreetsId:[],
             likesRe: [],
             likes: [],
             followers: [],
@@ -123,13 +123,14 @@ export default {
             showFollowings: false,
             showFollowers:false,
             showMyRefreets:false,
+            numLikes: 0,
         }
     },
     components: {
         Freet,
         Refreet,
         Followings
-        
+    
     },
     created(){
         axios.get('/api/users/'+this.userName)
@@ -138,10 +139,10 @@ export default {
                     data: response.data,
             });
             this.userProfile = response.data.user;
-            this.upvotedFreets = this.userProfile.upvotedFreets;
+            this.upvotedFreetsId = this.userProfile.upvotedFreets;
             this.followers = this.userProfile.followers;
             this.followings = this.userProfile.followings;
-            this.displayLikes(this.upvotedFreets);
+            this.displayLikes(this.upvotedFreetsId);
        
         })
         .catch((error) => {
@@ -188,14 +189,31 @@ export default {
             this.showLikes=true;
             
         },
-        displayLikes(like){
-            for (const element of like){
-                if(element.id.indexOf('re') !== -1){
-                    this.likesRe.push(element)
-                }else{
-                    this.likes.push(element)
-                }
+        displayLikes(ids){
+            for (const id of ids){
+                console.log(id)
+                axios.get('api/freets/' + id)
+                    .then((response) => {
+                        eventBus.$emit("upvote-freet-success",{
+                        data: response.data,
+                    });
+                    
+                    if (response.data!==undefined){
+                        this.numLikes+=1;
+                        if(response.data.id.indexOf('re') !== -1){
+                           this.likesRe.push(response.data)
+                        }else{
+                        this.likes.push(response.data)
+                        }
+                    }
+                    })
+                    .catch((error) => {
+                    if (error.response && error.response.status != 200){
+                        return false
+                    }
+                    })
             }
+   
         },
         showMyFreetsFn(){
             this.showLikes=false;

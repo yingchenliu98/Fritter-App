@@ -116,8 +116,8 @@ class Users {
    */
   static addUpvotedFreets(username, freet){
     const user = this.findOne(username);
-    if (!user.upvotedFreets.includes(freet)){
-      user.upvotedFreets.push(freet);
+    if (!user.upvotedFreets.includes(freet.id)){
+      user.upvotedFreets.push(freet.id);
     }
     return user;
   }
@@ -129,10 +129,9 @@ class Users {
    */
   static removeUpvotedFreets(username, freet){
     const user = this.findOne(username);
-    const index = user.upvotedFreets.indexOf(freet);
-    if (index > -1) {
+    const index = user.upvotedFreets.indexOf(freet.id);
+    if (index !== -1) {
         user.upvotedFreets.splice(index, 1);
-        freet.upvoters.splice(index,1);
     }
     return user;
   }
@@ -151,7 +150,7 @@ class Users {
   static removeReFreets(username, refreet){
     const user = this.findOne(username);
     const index = user.reFreets.indexOf(refreet);
-    if (index > -1) {
+    if (index !== -1) {
         user.reFreets.splice(index, 1);
     }
     return user;
