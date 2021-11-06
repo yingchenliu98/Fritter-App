@@ -14,6 +14,7 @@
         v-for="freet in results"
         :key="freet.id"
         :freet="freet"
+        :search="true"
         />
       <span class='error-msg' v-else>This user has no freets posted yet.</span></div>
     </form>

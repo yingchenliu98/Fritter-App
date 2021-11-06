@@ -2,26 +2,26 @@
   <div class="freet">
       <button  
         class="delete-button" 
-        v-show= "userName===freet.author"
+        v-show="userName===freet.author && !search"
         v-on:click="DeleteFreet"><i class="fa fa-trash"></i>
       </button>
        <button
         class="edit-button" 
-        v-show="!open && userName===freet.author"
+        v-show="!open && userName===freet.author && !search"
         v-on:click="EditFreet"
         ><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>
     
 
-    <h5><p>Freet id: <span>{{ freet.id }}</span></p>
-    <p>last edit: {{ freet.timestamp }}</p></h5>
-    <div class="author" display:inline > Author: 
-     {{ freet.author }} 
+    <h5> <span>@{{ freet.id }} {{ freet.timestamp.slice(0,10) }}</span></h5>
+ 
+    <div class="author" display:inline > 
+      <span>Author: {{ freet.author }} </span>
      <FollowButton 
       :freet = freet
       :userName = userName
       />
     </div>
-    <p v-show="!open">{{ freet.content }} </p>
+    <p v-show="!open" >{{ freet.content }} </p>
        <textarea 
         class="freet-container" 
         v-show="open"
@@ -41,18 +41,15 @@
       > <i class="fa fa-close"></i> Cancel
       </button>
     
-      <div class= "button" display:flex align:left>
+      <div v-show="!search" display:flex align:left>
         <UpvoteButton
         :freet = freet
         :userName = userName
         />
-      </div>
-      <div class= "refreet-button" >
         <RefreetButton
         :freet = freet
         :userName = userName
-        />
-      </div>
+      /></div>
  
 
     </div>
@@ -77,6 +74,10 @@ export default {
       type: Object,
       required: true,
     },
+    search: {
+      type: Boolean,
+      required: false,
+    },
   },
   components:{
     FollowButton, UpvoteButton, RefreetButton, 
@@ -93,7 +94,7 @@ export default {
   },
 
   methods:{
-
+    
     DeleteFreet(){
       axios.delete("/api/freets/delete/" + this.freet.id)
        .then((response) => {
@@ -144,14 +145,13 @@ export default {
   }
 .freet > p{  
   overflow-wrap: break-word;
+  font-size:11.0pt;
 }
 .freet > h5 > span {
   font-weight: 100;
   display: flex;
-  
-}
-.freet > h4 > span {
-  font-weight: 100;
+  font-size:10.0pt;
+  color: #104763;
 }
 
 .freet-container {
@@ -162,7 +162,8 @@ export default {
 .author{
   display:flex; 
   text-align: center;
-  
+  font-size:11.0pt;
+  font-weight:bold;
 }
 
 .delete-button{

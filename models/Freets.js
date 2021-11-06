@@ -199,7 +199,7 @@ class Freets {
    * @return {Freet | undefined} - deleted Freet
    */
   static deleteOneRefreet(id) {
-    const refreet = Freets.findByIdRefreet(id);
+    const refreet = Freets.findById(id);
     refreet_data = refreet_data.filter(refreet => refreet.id !== id);
     const freet = Freets.findById(refreet.freetId);
     freet.numRefreets-=1;
