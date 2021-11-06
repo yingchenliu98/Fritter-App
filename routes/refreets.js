@@ -33,9 +33,6 @@ router.post(
 /** find a refreet by refreeter*/
 router.get(
     '/:refreeter',
-    [
-        validateThat.inputAuthorEmpty,
-    ],
     (req, res) => {
         res.status(200).json(
             Freets.findByRefreeter(req.params.refreeter)
