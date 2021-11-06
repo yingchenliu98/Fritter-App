@@ -108,7 +108,6 @@ export default {
 .refreet > h4 > span {
   font-weight: 100;
 }
-
 .refreet > h5 > span {
   font-weight: 100;
   display: flex;

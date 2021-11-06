@@ -34,8 +34,7 @@ router.post(
 router.get(
     '/:refreeter',
     [
-        //validateThat.inputAuthorEmpty,
-        //validateThat.authorExists,
+        validateThat.inputAuthorEmpty,
     ],
     (req, res) => {
         res.status(200).json(

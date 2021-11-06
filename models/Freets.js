@@ -42,7 +42,6 @@ class Freets {
       numUpvotes, upvoters,
       numRefreets, refreeters} ;
     freet_data.push(freet);
-    console.log(freet_data)
     id_int += 1;
     return freet;
   }
@@ -203,7 +202,6 @@ class Freets {
     refreet_data = refreet_data.filter(refreet => refreet.id !== id);
     const freet = Freets.findById(refreet.freetId);
     freet.numRefreets-=1;
-    console.log(freet)
     return refreet;
   }
   /**
