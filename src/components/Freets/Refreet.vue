@@ -1,20 +1,20 @@
 <template>
   <div class="refreet">
-    <h4>refreet id: <span>{{ refreet.id }}</span></h4>
-    <h5>time <br><span>{{ refreet.timestamp }} </span></h5>
-    {{ refreet.refreeter }}: {{refreet.comments}}
+    <button  
+      class="delete-button" 
+      v-show="userName===refreet.refreeter"
+      v-on:click="DeleteRefreet()"><i class="fa fa-trash"></i>
+    </button>
+    <h5> <span>@{{ refreet.id }} {{ refreet.timestamp.slice(0,10) }} </span></h5>
+    <h4> {{ refreet.refreeter }}:<span> {{refreet.comments}}</span></h4> 
     <div class="original-freet" v-if='!error'>
-    {{ originalFreet.author }}: {{originalFreet.content }}</div>
+    <span>{{ originalFreet.author }}</span>: {{originalFreet.content }}</div>
     <section class="original-freet" v-else>{{ originalFreet }}</section>
     <p><UpvoteButton :freet = refreet :userName = userName /> </p>  
 
     <div class="buttons">   
    
-    <button  
-      class="button" 
-      v-show= "userName===refreet.refreeter"
-      v-on:click="DeleteRefreet()">Delete
-    </button>
+
     </div>
 </div>
 </template>
@@ -54,8 +54,7 @@ export default {
             if(response.data){
                 this.originalFreet = response.data;
             }
-            console.log('hahahh')
-            //console.log(this.originalFreet)
+
         })
         .catch((error) => {
             if (error.response && error.response.status != 200){
@@ -103,24 +102,32 @@ export default {
 .refreet > p{  
   overflow-wrap: break-word;
 }
-.refreet > h5 > span {
-  font-weight: 100;
-  display:flex;
-  
+.refreet > h4  {
+  font-size:11.0pt;
 }
 .refreet > h4 > span {
   font-weight: 100;
 }
-
+.refreet > h5 > span {
+  font-weight: 100;
+  display: flex;
+  font-size:10.0pt;
+  color: #104763;
+}
 .original-freet {
   overflow-wrap: break-word; 
   padding: 10px;
   width: 250px auto ;
   margin: 15px;
- 
   margin-bottom: 18px;
   border: 3px solid #ddd;
-  background-color: rgba(75, 129, 158, 0.432)
+  background-color: rgba(212, 233, 245, 0.432);
+  font-size:11.0pt;
+  
+}
+.original-freet >span {
+  font-weight:bold;
+  font-size:11.0pt;
   
 }
 
@@ -129,5 +136,7 @@ export default {
   justify-content:flex-end;
   
 }
-
+.delete-button{
+  float: right;
+}
 </style>

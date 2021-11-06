@@ -68,7 +68,7 @@ const freetIdExists = (req, res, next) => {
     next();
 };
 const refreetIdExists = (req, res, next) => {
-    const refreetId = Freets.findByIdRefreet(req.params.id) 
+    const refreetId = Freets.findById(req.params.id) 
     if(refreetId === undefined){
         res.status(400).json({
             error: `Refreet with id ${req.params.id} not found, please try another one.`
@@ -89,7 +89,7 @@ const editSelfFreet = (req, res, next) => {
     next();
 };
 const editSelfRefreet = (req, res, next) => {
-    const refreeter = Freets.findByIdRefreet(req.params.id).refreeter;
+    const refreeter = Freets.findById(req.params.id).refreeter;
     const username = req.session.username;
     if(refreeter !== username){
         res.status(401).json({
