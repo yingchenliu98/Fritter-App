@@ -2,13 +2,15 @@
   <div class="refreet">
     <button  
       class="delete-button" 
-      v-show="userName===refreet.refreeter"
+      v-show="userName===refreet.refreeter && !upvoted"
       v-on:click="DeleteRefreet()"><i class="fa fa-trash"></i>
     </button>
     <h5> <span>@{{ refreet.id }} {{ refreet.timestamp.slice(0,10) }} </span></h5>
     <h4> {{ refreet.refreeter }}:<span> {{refreet.comments}}</span></h4> 
     <div class="original-freet" v-if='!error'>
+    <p>@{{ originalFreet.id }} {{ originalFreet.timestamp.slice(0,10)}}</p>
     <span>{{ originalFreet.author }}</span>: {{originalFreet.content }}</div>
+    
     <section class="original-freet" v-else>{{ originalFreet }}</section>
     <p><UpvoteButton :freet = refreet :userName = userName /> </p>  
 
@@ -23,7 +25,7 @@
 import { eventBus } from "../../main";
 import axios from 'axios';
 import UpvoteButton from "@/components/Freets/UpvoteButton.vue";
-// import FollowButton from "@/components/Users/FollowButton.vue";
+
 export default {
   name: "Refreet",
 
@@ -31,6 +33,10 @@ export default {
     refreet: {
       type: Object,
       required: true,
+    },
+    upvoted: {
+      type: Object,
+      required: false,
     },
   },
   components:{
@@ -45,7 +51,16 @@ export default {
 
 
   },
-    created() {
+  created() {
+    this.GetFreet() 
+    eventBus.$on([ "delete-freet-success",
+                    "edit-freet-success","delete-refreet-success"], ()=>{
+        this.GetFreet();
+    });
+  },
+
+  methods:{
+      GetFreet() {
       axios.get('api/freets/'+this.refreet.freetId)
         .then((response) => {
             eventBus.$emit("get-freet-success",{
@@ -64,15 +79,13 @@ export default {
           })
   },
 
-
-  methods:{
       DeleteRefreet(){
       axios.delete("/api/refreets/delete/" + this.refreet.id)
        .then((response) => {
-            eventBus.$emit("delete-freet-success",{
+            eventBus.$emit("delete-refreet-success",{
               data: response.data,
             });
-            window.location.reload();
+         
           })
        .catch((error) => {
            console.log(this.refreet)
@@ -127,9 +140,16 @@ export default {
 }
 .original-freet >span {
   font-weight:bold;
-  font-size:11.0pt;
-  
+  font-size:11.0pt; 
 }
+.original-freet >p {
+  font-weight: 100;
+  display: flex;
+  font-size:10.0pt;
+  color: #104763;
+}
+
+
 
 .buttons{
   display:flex; 

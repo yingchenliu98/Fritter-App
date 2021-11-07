@@ -39,7 +39,6 @@ export default ({
             eventBus.$emit("create-freet-success",{
               data: response.data,
             });
-            window.location.reload();
           })
           .catch((error) => {
             if (error.response && error.response.status != 200){
