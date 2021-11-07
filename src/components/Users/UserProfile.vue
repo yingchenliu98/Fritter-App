@@ -13,7 +13,7 @@
             <button
                 class="freets-link"
                 @mouseover="showLikesFn()"
-                >Likes ({{numLikes}})
+                >Upvoted({{numLikes}})
             </button>
             <button
                 class="freets-link"

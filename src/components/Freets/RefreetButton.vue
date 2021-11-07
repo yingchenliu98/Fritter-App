@@ -6,7 +6,7 @@
         v-show="open"
         id="comments"
         name="comments"
-        placeholder='comments....'
+        placeholder='comments(optional)....'
         v-model="comments"
     ></textarea>
     </div>
