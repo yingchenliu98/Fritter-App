@@ -201,7 +201,9 @@ class Freets {
     const refreet = Freets.findById(id);
     refreet_data = refreet_data.filter(refreet => refreet.id !== id);
     const freet = Freets.findById(refreet.freetId);
-    freet.numRefreets-=1;
+    if(freet!==undefined){
+      freet.numRefreets-=1;
+    }
     return refreet;
   }
   /**

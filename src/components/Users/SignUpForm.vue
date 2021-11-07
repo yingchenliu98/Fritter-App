@@ -12,9 +12,9 @@
           class="input-item"
           id="password" 
           name="password"
-          placeholder='password (at least 8 chars)'
+          placeholder='passwords (at least 8 chars)'
           v-model="password" >
-
+        <span>Username and Passwords can be changed later.</span>
         <br>
         <span class='error-msg' v-if="error">{{ error }}</span>
         <br>

@@ -11,6 +11,7 @@
         <br>
        
         <span class='error-msg' v-if="error">{{ error }}</span>
+        
         <br>
         <input class="update-btn" type="submit" value="Update Password">  
     </form>
@@ -28,6 +29,7 @@ export default ({
         password:"",
         error: null,
         signedInUser: "",
+        message: "",
       }
   },
   methods:{

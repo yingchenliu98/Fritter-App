@@ -12,7 +12,7 @@
 <script>
 import Refreet from "@/components/Freets/Refreet.vue";
 import axios from "axios";
-// import { eventBus } from "../main";
+import { eventBus } from "../../main";
 export default{
     name: "ListAllReFreets",
     components: {
@@ -27,15 +27,26 @@ export default{
         }
     },
     created(){
-        axios.get("api/refreets")
-            .then((response) => {
-                this.refreets = response.data
-            }).catch(error => {
-               alert(error)
-           })
+        this.getRefreets();
+        eventBus.$on(["refreet-success",
+                    "upvote-freet-success", 
+                    "unupvote-freet-success",
+                    "delete-refreet-success",
+                    "edit-freet-success"], ()=>{
+        this.getRefreets();
+    });
+        
     },
     methods: {
-        
+        getRefreets(){
+            axios.get("/api/refreets")
+            .then((response) => {
+               this.refreets = response.data
+            })
+            .catch(error => {
+               alert(error)
+           })
+        }
     }
  
 }

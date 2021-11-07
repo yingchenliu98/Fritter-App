@@ -40,22 +40,33 @@ export default {
        }
    },
     created() {
+        this.UpdateStatus();
+        // eventBus.$on(["upvote-freet-success", "unupvote-freet-success"],() =>{
+        //        this.UpdateStatus();
+        // })
+      
+       
+  },
+    methods:{
+        //some problem with this
+    UpdateStatus(){
         if(this.freet.upvoters.includes(this.userName)){
             this.upvoted=true;
         }else{
          this.upvoted=false;
         }
         this.upVoteButton.text = this.upvoted ? 'Unupvote' : 'Upvote';
-
-  },
-    methods:{
+    },
     UpvoteFreet(){
         axios.post("/api/freets/upvote/" + this.freet.id)
             .then((response) => {
             eventBus.$emit("upvote-freet-success",{
                 data: response.data,
             }); 
-            window.location.reload();
+            window.location.reload()
+            // this.UpdateStatus()
+            // this.upvoted=true;
+            // this.upVoteButton.text = this.upvoted ? 'Unupvote' : 'Upvote';
             })
             .catch((error) => {
                 if (error.response && error.response.status != 200){
@@ -69,8 +80,11 @@ export default {
             eventBus.$emit("unupvote-freet-success",{
                 data: response.data,
             }); 
-            window.location.reload();
-            
+            // this.upvoted=false;
+            // this.upVoteButton.text = this.upvoted ? 'Unupvote' : 'Upvote';
+
+            // this.UpdateStatus()
+            window.location.reload()
             })
             .catch((error) => {
                 if (error.response && error.response.status != 200){

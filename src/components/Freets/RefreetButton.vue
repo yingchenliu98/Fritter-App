@@ -6,7 +6,7 @@
         v-show="open"
         id="comments"
         name="comments"
-        placeholder='comments....'
+        placeholder='comments(optional)....'
         v-model="comments"
     ></textarea>
     </div>
@@ -72,13 +72,12 @@ export default {
                 comments: this.comments
                 })
             .then((response) => {
-               
                 this.open=false;
-        
                 eventBus.$emit("refreet-success", {
                     data: response.data,
                     });
-                window.location.reload();
+            this.comments=''
+               
             })
             .catch((error) => {
                 if (error.response && error.response.status != 200){

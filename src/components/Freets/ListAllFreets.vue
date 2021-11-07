@@ -13,7 +13,7 @@
 <script>
 import Freet from "@/components/Freets/Freet.vue";
 import axios from "axios";
-// import { eventBus } from "../main";
+import { eventBus } from "../../main";
 
 export default{
     name: "ListAllFreets",
@@ -21,7 +21,6 @@ export default{
         Freet
     },
     props:{
-       
       
     },
     data(){
@@ -31,19 +30,31 @@ export default{
         }
     },
     created(){
-        axios.get("/api/freets")
+        this.getFreets();
+        eventBus.$on(["create-freet-success",
+                    "edit-freet-success",
+                    "delete-freet-success",
+                    "upvote-freet-success", 
+                    "unupvote-freet-success",
+                    "refreet-success"], ()=>{
+            this.getFreets();
+        });
+
+        
+        
+ 
+    },
+    methods: {
+        getFreets(){
+            axios.get("/api/freets")
             .then((response) => {
                this.freets = response.data
             })
             .catch(error => {
                alert(error)
            })
-        axios.get("api/refreets")
-            .then((response) => {
-                this.refreets = response.data
-            })
-    },
-    methods: {
+        },
+
         
     }
  

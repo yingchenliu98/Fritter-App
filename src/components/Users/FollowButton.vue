@@ -4,7 +4,8 @@
         class="button"
         v-show="userName!==freet.author"
         v-on:click="followed? UnFollow() : Follow()"
-        ><i class="fa fa-plus" aria-hidden="true"></i>{{followButton.text}}
+        ><i class="fa fa-plus" v-show="!followed" aria-hidden="true"></i>
+        {{followButton.text}}
     </button>
     </div>
 
@@ -35,6 +36,13 @@ export default {
        }
    },
     created() {
+      this.getUser();
+        eventBus.$on(["follow-user-success","unfollow-user-success"], ()=>{
+            this.getUser();
+        });
+    },
+    methods:{
+        getUser(){
         axios.get('api/users/' + this.userName)
             .then((response) => {
                 this.userProfile = response.data.user;
@@ -47,14 +55,13 @@ export default {
                 this.followButton.text = this.followed ? ' Following' : ' Follow';
        })
     },
-    methods:{
         Follow(){
             axios.post("api/users/following/" + this.freet.author)
             .then((response) => {
                 eventBus.$emit("follow-user-success",{
                     data: response.data,
                 }); 
-                window.location.reload();
+                
             })
             .catch((error) => {
                 if (error.response && error.response.status != 200){
@@ -69,7 +76,7 @@ export default {
                 eventBus.$emit("unfollow-user-success",{
                     data: response.data,
                 }); 
-                window.location.reload();
+            
                             })
             .catch((error) => {
                 if (error.response && error.response.status != 200){
