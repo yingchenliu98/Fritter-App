@@ -2,12 +2,12 @@
   <div class="freet">
       <button  
         class="delete-button" 
-        v-show="userName===freet.author && !search"
+        v-show="userName===freet.author && !search &&!upvoted"
         v-on:click="DeleteFreet"><i class="fa fa-trash"></i>
       </button>
        <button
         class="edit-button" 
-        v-show="!open && userName===freet.author && !search"
+        v-show="!open && userName===freet.author && !search &&!upvoted"
         v-on:click="EditFreet"
         ><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>
     
@@ -33,13 +33,14 @@
         v-show="open"
         v-on:click="SubmitEditedFreet"
         ><i class="fa fa-check" aria-hidden="true"></i>Submit</button> 
-
+   
       <button  
       class="button" 
       v-show="open"
       v-on:click="open=false" 
       > <i class="fa fa-close"></i> Cancel
       </button>
+      
     
       <div v-show="!search" display:flex align:left>
         <UpvoteButton
@@ -50,13 +51,11 @@
         :freet = freet
         :userName = userName
       /></div>
- 
-
+        <span v-if="error && open">{{ error }}</span>
     </div>
     
   
-  
-    
+
 
 </template>
 
@@ -78,6 +77,10 @@ export default {
       type: Boolean,
       required: false,
     },
+    upvoted: {
+      type: Boolean,
+      required: false,
+    },
   },
   components:{
     FollowButton, UpvoteButton, RefreetButton, 
@@ -88,7 +91,8 @@ export default {
       open: false,
       NewFreet:{
         content: this.freet.content+ "",
-        }
+        },
+      error:null,
     }
 
   },
@@ -101,7 +105,6 @@ export default {
             eventBus.$emit("delete-freet-success",{
               data: response.data,
             });
-            window.location.reload();
           })
        .catch((error) => {
             if (error.response && error.response.status != 200){
@@ -112,6 +115,7 @@ export default {
     },
     EditFreet(){
       this.open = true;
+      this.error=null;
       this.buttonValue= 'Submit';
     },
     SubmitEditedFreet(){
@@ -120,11 +124,12 @@ export default {
             eventBus.$emit("edit-freet-success",{
               data: response.data,
             });
-            window.location.reload();
+            this.open = false;
+            
           })
         .catch((error) => {
           if (error.response && error.response.status != 200){
-            alert(error.response.data.error)
+            this.error = error.response.data.error
           }
         })
       

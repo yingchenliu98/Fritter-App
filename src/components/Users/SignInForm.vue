@@ -12,7 +12,7 @@
           class="input-item"
           id="password" 
           name="password"
-          placeholder='password (at least 8 chars)'
+          placeholder='passwords (at least 8 chars)'
           v-model="password" >
 
         <br>

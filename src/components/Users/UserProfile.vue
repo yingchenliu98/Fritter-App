@@ -45,11 +45,13 @@
             <Freet
             v-for='freet in likes'
             :key='freet.id'
+            :upvoted='true'
             :freet='freet'
             />
             <Refreet
             v-for='refreet in likesRe'
             :key='refreet.id'
+            :upvoted='true'
             :refreet='refreet'
             />
          
@@ -133,27 +135,50 @@ export default {
     
     },
     created(){
-        axios.get('/api/users/'+this.userName)
-            .then((response) => {
-                eventBus.$emit("upvote-freet-success",{
-                    data: response.data,
-            });
-            this.userProfile = response.data.user;
-            this.upvotedFreetsId = this.userProfile.upvotedFreets;
-            this.followers = this.userProfile.followers;
-            this.followings = this.userProfile.followings;
-            this.displayLikes(this.upvotedFreetsId);
-       
-        })
-        .catch((error) => {
-        if (error.response && error.response.status != 200){
-            alert(error.response.data.error)
-        }
-        }),
+        this.getUser()
+        this.getFreets()
+        this.getRefreets()
+        eventBus.$on([ "delete-freet-success",
+                    "edit-freet-success",
+                    "delete-refreet-success",
+                    "create-freet-success",
+                    // "upvote-freet-success", 
+                    // "unupvote-freet-success",
+                    "refreet-success"], ()=>{
+        this.getUser();
+        this.getFreets()
+        this.getRefreets()
+    });
         
-        axios.get('/api/freets/show/'+this.userName)
+        
+  
+    },
+    methods:{
+        getUser(){
+            axios.get('/api/users/'+this.userName)
+                .then((response) => {
+                    eventBus.$emit("get-user-success",{
+                        data: response.data,
+                });
+                this.userProfile = response.data.user;
+                this.upvotedFreetsId = this.userProfile.upvotedFreets;
+                this.followers = this.userProfile.followers;
+                this.followings = this.userProfile.followings;
+                console.log(this.upvotedFreetsId)
+                this.displayLikes(this.upvotedFreetsId);
+        
+            })
+            .catch((error) => {
+                if (error.response && error.response.status != 200){
+                    alert(error.response.data.error)
+                }
+            })
+            
+        },
+        getFreets(){
+            axios.get('/api/freets/show/'+this.userName)
             .then((response) => {
-                eventBus.$emit("upvote-freet-success",{
+                eventBus.$emit("get-freet-success",{
                     data: response.data,
             });
             this.myFreets = response.data;
@@ -162,11 +187,14 @@ export default {
         if (error.response && error.response.status != 200){
             alert(error.response.data.error)
         }
-        }),
+        })
+
+        },
+        getRefreets(){
 
         axios.get('/api/refreets/'+this.userName)
             .then((response) => {
-                eventBus.$emit("upvote-freet-success",{
+                eventBus.$emit("get-refreet-success",{
                     data: response.data,
             });
 
@@ -177,10 +205,8 @@ export default {
             alert(error.response.data.error)
         }
         })
-        
-  
-    },
-    methods:{
+        },
+
         showLikesFn(){
             this.showMyFreets=false;
             this.showFollowings=false;
@@ -194,10 +220,6 @@ export default {
                 console.log(id)
                 axios.get('api/freets/' + id)
                     .then((response) => {
-                        eventBus.$emit("upvote-freet-success",{
-                        data: response.data,
-                    });
-                    
                     if (response.data!==undefined){
                         this.numLikes+=1;
                         if(response.data.id.indexOf('re') !== -1){
