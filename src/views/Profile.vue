@@ -27,7 +27,7 @@ export default {
 </script>
 <style scoped>
 .body-container{
-    margin-top: 80px;
+    margin-top: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;

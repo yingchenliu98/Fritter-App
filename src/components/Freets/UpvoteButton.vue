@@ -1,11 +1,11 @@
 <template>
     <div class="upvote">
     <button  
-      class="button" 
+      class="freet-btn" 
       @mouseover="showUpvoters=true"
       @mouseleave="showUpvoters=false"
       v-on:click.prevent="upvoted ? UnUpvoteFreet() : UpvoteFreet()" 
-      ><i class="fa fa-heart red-color " ></i> {{upVoteButton.text}} {{ freet.numUpvotes }}
+      ><i class="fa fa-heart " ></i> {{upVoteButton.text}} {{ freet.numUpvotes }}
     </button>
     <div v-show="showUpvoters">
       <span> {{ freet.upvoters.join(', ')}}</span>
@@ -96,13 +96,5 @@ export default {
 }
 </script>
 <style scoped>
-.buttons{
-  display:flex; 
-  justify-content:flex-end;
- 
-}
-.red-color {
-color:red;
-}
 
 </style>

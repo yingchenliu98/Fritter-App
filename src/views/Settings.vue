@@ -3,9 +3,9 @@
         <Navbar />
         <section class="body-container">
             <div v-if="userName">
-                <h2>Settings</h2>
+                <h2 class="settings-title">Settings</h2>
             </div>
-            <div style="display: flex;">
+            <div class="col">
                 <UpdateUsername />
                 <UpdatePassword />
                 <DeleteAccount />
@@ -32,3 +32,16 @@ export default {
     },
 }
 </script>
+<style scoped>
+.body-container{
+    margin-top: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.col {
+    display: flex;
+    padding-left: 250px;
+}
+
+</style>

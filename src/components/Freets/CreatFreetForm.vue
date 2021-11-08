@@ -1,18 +1,15 @@
 <template>
     <form class="create-freet-form" @submit.prevent="createFreet">
-        <h3>Create a Freet</h3>
-        <textarea 
+        <h3 class="title">Create a Freet</h3>
+        <input
+          type="text" 
           class="freet-container" 
           id="content" 
           placeholder='create a freet....'
           v-model="NewFreet.content" >
-        </textarea>
         
         <span class='error-msg' v-if="error">{{ error }}</span>
         <input class="button" type="submit" value="Post">  
-        
-
-
     </form>
 </template>
 
@@ -55,18 +52,25 @@ export default ({
 .create-freet-form {
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: calc(100% - 120px);
   padding: 20px;
   margin: 40px ;
-  background-color: #3CA3D8;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 1px 1px 6px 0 rgba(31,38,135,0.3);
+}
+.title {
+  background: -webkit-linear-gradient(120deg, #00E5FF, #1200FF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .freet-container {
   display: flex;
   height: 100px;
   padding: 20px;
-  border: 3px solid #ddd;
-  background-color: white;
- 
+  border-radius: 10px;
+  background-color: #E8F0FC;
+  border: 0;
 }
 
 .freet-container li {
@@ -80,5 +84,15 @@ export default ({
 .error-msg {
   margin-left:40px;
   color: rgb(0, 0, 0);
+}
+
+.button {
+  font-weight: 600;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 50px;
+  background: -webkit-linear-gradient(120deg, #00E5FF, #1200FF);
+  box-shadow: 1px 1px 6px 0 rgba(31,38,135,0.3);
 }
 </style>

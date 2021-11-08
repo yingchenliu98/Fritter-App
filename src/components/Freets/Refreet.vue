@@ -106,11 +106,12 @@ export default {
 <style scoped>
 .refreet {
   padding: 10px;
-  width: 250px ;
+  width: calc(100% - 60px);
   margin: 15px;
   margin-bottom: 18px;
-  border: 3px solid #ddd;
-  background-color: rgba(255, 255, 255, 0.432)
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 1px 1px 6px 0 rgba(31,38,135,0.3);
   }
 .refreet > p{  
   overflow-wrap: break-word;
