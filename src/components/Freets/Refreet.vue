@@ -112,7 +112,7 @@ export default {
   background-color: white;
   border-radius: 10px;
   box-shadow: 1px 1px 6px 0 rgba(31,38,135,0.3);
-  }
+}
 .refreet > p{  
   overflow-wrap: break-word;
 }
