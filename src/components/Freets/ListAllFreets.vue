@@ -1,13 +1,13 @@
 <template>
     <div class="list-all-freets">
-       
-        <span class="freets"><Freet  
-        v-for="freet in freets"
-        :key="freet.id"
-        :freet="freet"/></span>
-  
+        <h2 class="section-title">Freets</h2>
+        <div class="freets">
+            <Freet  
+                v-for="freet in freets"
+                :key="freet.id"
+                :freet="freet"/>
+        </div>
     </div>
-
 </template>
 
 <script>
@@ -63,17 +63,29 @@ export default{
 </script>
 
 <style scoped>
+
 .list-all-freets {
-  height: 650px ;
-  display: flex;
-  justify-content: center;
-  padding: 20px;
-  width: 300px;
-  margin: 40px;
-  background-color: #3CA3D8;
-  overflow: auto;
-  overflow-wrap: anywhere;
-  
+    width: 40%;
+    margin: 0 20px;
+}
+.section-title {
+    width: 80%;
+    height: 30px;
+    padding: 10px 20px;
+    border-radius: 30px;
+    background: -webkit-linear-gradient(120deg,#00E5FF, #1200FF);
+    box-shadow: 1px 1px 6px 0 rgba(31,38,135,0.3);
+    color: white;
+}
+.freets {
+    min-height: 650px;
+    width: 100%;
+    background: #F4F8FE;
+    overflow: auto;
+    overflow-wrap: anywhere;
+    justify-content: center;
+    border-radius: 10px;
+    box-shadow: 1px 1px 6px 0 rgba(31,38,135,0.3);
 }
 
 

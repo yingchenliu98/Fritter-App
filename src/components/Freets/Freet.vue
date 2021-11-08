@@ -42,15 +42,16 @@
       </button>
       
     
-      <div v-show="!search" display:flex align:left>
+      <div v-show="!search">
         <UpvoteButton
-        :freet = freet
-        :userName = userName
+          :freet = freet
+          :userName = userName
         />
         <RefreetButton
-        :freet = freet
-        :userName = userName
-      /></div>
+          :freet = freet
+          :userName = userName
+        />
+      </div>
         <span v-if="error && open">{{ error }}</span>
     </div>
     
@@ -142,12 +143,13 @@ export default {
 <style scoped>
 .freet {
   padding: 10px;
-  width: 250px ;
+  width: calc(100% - 60px);
   margin: 15px;
   margin-bottom: 18px;
-  border: 3px solid #ddd;
-  background-color: rgba(255, 255, 255, 0.432)
-  }
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 1px 1px 6px 0 rgba(31,38,135,0.3);
+}
 .freet > p{  
   overflow-wrap: break-word;
   font-size:11.0pt;
@@ -166,9 +168,13 @@ export default {
 
 .author{
   display:flex; 
-  text-align: center;
+  align-items: center;
   font-size:11.0pt;
   font-weight:bold;
+}
+
+.author > span {
+  margin-right: 20px;
 }
 
 .delete-button{
@@ -177,5 +183,6 @@ export default {
 .edit-button{
   float: right;
 }
+
 
 </style>

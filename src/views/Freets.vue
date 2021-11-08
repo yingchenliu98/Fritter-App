@@ -1,18 +1,16 @@
 <template>
-  <div>
+  <div class="freets-page">
     <Navbar />
     <div class="body-container">
-      <!-- <UserProfile v-bind:signedInUser="signedInUser"/> -->
-       <div class="col-side" id="col1"><h2>Lists of All Freets</h2><ListAllFreets/></div>
-       <div class="col" id="col2"><h2>Lists of All ReFreets</h2><ListAllRefreets/></div>
-       <div class="col-side" id="col3">
-        
-         <CreatFreetForm  v-show="userName"/> 
-         <SearchFreet /></div>
+      <div class="freet-col">
+          <ListAllFreets/>
+          <ListAllRefreets/>
+      </div>
       
-      
-       
-     
+      <div class="side-col">
+        <CreatFreetForm  v-show="userName"/> 
+        <SearchFreet />
+      </div>
     </div>
   </div>
 </template>
@@ -44,30 +42,37 @@ export default {
 </script>
 
 <style scoped>
+.freets-page {
+  width: 100%;
+  min-height: 98vh;
+  overflow-x: hidden;
+  background: #F4F8FE;
+}
 .body-container {
+  margin-top: 120px;
   display: flex;
-  justify-content: space-between;
-  justify-content: center;
   flex-direction: row;
-  height: 100vh;
+  justify-content: center;
+  min-height: 83vh;
 
 }
-.body-container > div > h2{
-  margin-left: 30px;
-}
-/* .col-side {
-  flex: 1
-} */
-.body-container > div + div {
-  border-left: 2px solid rgba(0, 0, 0, 0.12);
-}
 
-.col1 {
-  border-right: 2px solid rgba(0, 0, 0, 0.12);
+.freet-col {
+  width: 50%;
+  margin: 0 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background: #E8F0FC;
+  border-radius: 20px;
+  box-shadow: 1px 1px 6px 0 rgba(31,38,135,0.3);
 }
-
-.col3{
-  border-left: 2px solid rgba(0, 0, 0, 0.12);
+.side-col {
+  width: 30%;
+  margin: 0 30px;
+  background: -webkit-linear-gradient(120deg,#00E5FF, #1200FF);
+  border-radius: 20px;
+  box-shadow: 1px 1px 6px 0 rgba(31,38,135,0.3);
 }
 
 .router-link{

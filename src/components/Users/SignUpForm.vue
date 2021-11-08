@@ -75,15 +75,17 @@ export default ({
   align-items: center;
 }
 .signup-btn{
-  border-radius: 5px;
+  border-radius: 50px;
+  width: 50vw;
   color: white;
   font-weight: 700;
   font-size: 1.5rem;
-  background-color: #3CA3D8;
+  background: -webkit-linear-gradient(120deg,#00E5FF, #1200FF);
   padding: 20px;
   text-decoration: none;
   border: none;
   cursor: pointer;
+  box-shadow: 1px 1px 6px 0 rgba(31,38,135,0.3);
 }
 .signup-btn:hover {
   filter: brightness(1.1);

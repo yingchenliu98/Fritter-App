@@ -3,10 +3,10 @@
         <Navbar />
         <section class="body-container">
             <div v-if="userName">
-                <h1> Welcome, {{ userName }}!</h1>
+                <h1 class="welcome"> Welcome, {{ userName }}!</h1>
             </div>
             <div v-else class="body-container">
-                <h1>Welcome to Fritter!</h1>
+                <h1 class="welcome">Welcome to Fritter!</h1>
                 <p>This is the best place to see what’s happening in your world.</p>
                 <p>Find some people and topics to follow now.</p>
             </div>
@@ -32,23 +32,28 @@ export default {
 }
 
 </script>
-<style scope>
+<style scoped>
 .body-container{
-    margin-top: 80px;
+    margin-top: 150px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 .freets-link {
-    border-radius: 5px;
+    border-radius: 100px;
     color: white;
+    font-size: 2rem;
     font-weight: 700;
-    background-color: #3CA3D8;
-    padding: 20px;
+    background: -webkit-linear-gradient(120deg,#00E5FF, #1200FF);
+    padding: 30px;
     text-decoration: none;
+    box-shadow: 1px 1px 6px 0 rgba(31,38,135,0.3);
 }
 .freets-link:hover {
     filter: brightness(1.1);
     transition: All 0.2s ease-out;
+}
+.welcome {
+    font-size: 3rem;
 }
 </style>

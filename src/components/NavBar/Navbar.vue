@@ -58,55 +58,64 @@ export default ({
     }
 })
 </script>
-<style>
+<style scoped>
 .nav-template {
     display: flex;
     justify-content: center;
 }
 .navbar {
-    background: #3CA3D8;
-    color: white;
+    background: #E8F0FC;
+    color: grey;
     position: fixed;
-    left: 0;
-    top: 0;
-    width: 100vw;
+    left: 8vw;
+    top: 20px;
+    width: 80vw;
     height: 80px;
     padding: 0 40px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    border-radius: 40px;
+    box-shadow: 1px 1px 6px 0 rgba(31,38,135,0.3);
 }
 .nav-router-link {
     text-decoration: none;
-    color: white;
+    color: grey;
     padding: 5px 10px;
 }
 .nav-router-link:hover {
-    background-color: rgb(131, 219, 253);
-    color: rgb(77, 77, 77);
-    border-radius: 5px;
+    background-color: grey;
+    color: white;
+    border-radius: 50px;
     transition: all 0.2s ease-out;
 }
 
 .logo-home {
-    font-size: 4rem;
+    font-size: 3.5rem;
     text-decoration: none;
-    color: white;
+    font-size: 72px;
+    background: -webkit-linear-gradient(120deg, #00E5FF, #1200FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding-left: 20px;
 }
 .nav-btn {
-    width: 30vw;
+    width: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 30px;
+    padding: 0 10px;
 }
 
 .dropdown {
   float: left;
   overflow: hidden;
+  border-radius: 50px;
 }
 
-.dropdown:hover {
-    background-color: rgb(131, 219, 253);
+.dropdown:hover .dropbtn {
+    background-color: grey;
+    color: white;
     transition: all 0.2s ease-out;
 }
 
@@ -114,7 +123,7 @@ export default ({
   font-size: 16px;  
   border: none;
   outline: none;
-  color: white;
+  color: grey;
   padding: 14px 16px;
   background-color: inherit;
   font-family: inherit;

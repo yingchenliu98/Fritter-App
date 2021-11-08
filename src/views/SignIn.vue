@@ -6,8 +6,8 @@
             <div v-if="isSignedIn">
                 <p>Signed In!</p> 
             </div>
-            <div v-else>
-                <router-link class="create-account" to="/signup">Create A New Account</router-link>
+            <div v-else class="create-account">
+                <router-link to="/signup">Create A New Account</router-link>
             </div>
         </div>
     </div>
@@ -42,3 +42,9 @@ export default {
   }
   
 </script>
+<style scoped>
+.create-account {
+    display: flex;
+    justify-content: center;
+}
+</style>

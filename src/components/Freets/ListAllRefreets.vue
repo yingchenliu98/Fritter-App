@@ -1,11 +1,12 @@
 <template>
     <div class="list-all-refreets">
-        
-        <span class="refreets"><Refreet  
-        v-for="refreet in refreets"
-        :key="refreet.id"
-        :refreet="refreet"/></span>
-  
+        <h2 class="section-title">Refreets</h2>
+        <div class="refreets">
+            <Refreet  
+                v-for="refreet in refreets"
+                :key="refreet.id"
+                :refreet="refreet"/>
+        </div>
     </div>
 
 </template>
@@ -55,17 +56,26 @@ export default{
 
 <style scoped>
 .list-all-refreets {
-  height: 650px ;
-  display: flex;
-  justify-content: center;
-  padding: 20px;
-  width: 300px;
-  margin: 40px;
-  background-color: #3CA3D8;
-  overflow: auto;
-  overflow-wrap: anywhere;
-  
+    width: 40%;
+    margin: 0 20px;
 }
-
-
+.section-title {
+    width: 80%;
+    height: 30px;
+    padding: 10px 20px;
+    border-radius: 30px;
+    background: -webkit-linear-gradient(120deg,#00E5FF, #1200FF);
+    box-shadow: 1px 1px 6px 0 rgba(31,38,135,0.3);
+    color: white;
+}
+.refreets {
+    min-height: 650px;
+    width: 100%;
+    background: #F4F8FE;
+    overflow: auto;
+    overflow-wrap: anywhere;
+    justify-content: center;
+    border-radius: 10px;
+    box-shadow: 1px 1px 6px 0 rgba(31,38,135,0.3);
+}
 </style>

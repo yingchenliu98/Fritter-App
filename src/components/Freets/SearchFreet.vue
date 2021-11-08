@@ -1,6 +1,6 @@
 <template>
     <form class="search-freet-form" @submit.prevent="onSubmit">
-      <h3>Search for a Freet</h3>
+      <h3 class="title">Search for a Freet</h3>
       <input 
         class="search-container" 
         id="search" 
@@ -71,24 +71,37 @@ export default ({
 .search-freet-form{
   height: 280px;
   display: flex;
-  overflow: auto;
   flex-direction: column;
-  width: 300px;
+  width: calc(100% - 120px);
   padding: 20px;
   margin: 40px ;
-  background-color: #3CA3D8;
-  
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 1px 1px 6px 0 rgba(31,38,135,0.3);
+  overflow: auto;
+}
+.title {
+  background: -webkit-linear-gradient(120deg, #00E5FF, #1200FF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .search-container {
   display: flex;
-  padding: 10px;
-  border: 3px solid #ddd;
-  background-color: white;
-
+  height: 100px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #E8F0FC;
+  border: 0;
 }
-.search-freet-form .button {
-  display: block;
-  margin: 30px auto
+.button {
+  font-weight: 600;
+  border: none;
+  margin-top: 20px;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 50px;
+  background: -webkit-linear-gradient(120deg, #00E5FF, #1200FF);
+  box-shadow: 1px 1px 6px 0 rgba(31,38,135,0.3);
 }
 .error-msg {
   margin-left:40px;
