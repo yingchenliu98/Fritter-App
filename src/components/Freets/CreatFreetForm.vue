@@ -21,7 +21,6 @@ export default ({
   name: 'CreateFreetForm',
   data(){
       return{
-        
         error: null,
         NewFreet:{
         content: "",
